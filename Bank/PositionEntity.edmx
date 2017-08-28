@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BankingSystemV3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="int" Nullable="false" />
+          <Property Name="accountType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="acumulativeID" Type="int" Nullable="false" />
+          <Property Name="regularID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AcumulativeAccount">
+          <Key>
+            <PropertyRef Name="acumulativeID" />
+          </Key>
+          <Property Name="acumulativeID" Type="int" Nullable="false" />
+          <Property Name="growRate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="bankID" />
+          </Key>
+          <Property Name="bankID" Type="int" Nullable="false" />
+          <Property Name="bankName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="bankLocation" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="int" Nullable="false" />
+          <Property Name="customerName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="customerSurname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="customerAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="customerPhone" Type="int" Nullable="false" />
+          <Property Name="customerAccNo" Type="int" Nullable="false" />
+          <Property Name="accountID" Type="int" Nullable="false" />
+          <Property Name="bankID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RegularAccount">
+          <Key>
+            <PropertyRef Name="regularID" />
+          </Key>
+          <Property Name="regularID" Type="int" Nullable="false" />
+          <Property Name="regularAccount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Account_AcumulativeAccount">
+          <End Role="AcumulativeAccount" Type="Self.AcumulativeAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcumulativeAccount">
+              <PropertyRef Name="acumulativeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="acumulativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_RegularAccount">
+          <End Role="RegularAccount" Type="Self.RegularAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegularAccount">
+              <PropertyRef Name="regularID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="regularID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="accountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="bankID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="bankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankingSystemV3ModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcumulativeAccount" EntityType="Self.AcumulativeAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegularAccount" EntityType="Self.RegularAccount" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_AcumulativeAccount" Association="Self.FK_Account_AcumulativeAccount">
+            <End Role="AcumulativeAccount" EntitySet="AcumulativeAccount" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_RegularAccount" Association="Self.FK_Account_RegularAccount">
+            <End Role="RegularAccount" EntitySet="RegularAccount" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Bank" Association="Self.FK_Customer_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankingSystemV3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="Int32" Nullable="false" />
+          <Property Name="accountType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="acumulativeID" Type="Int32" Nullable="false" />
+          <Property Name="regularID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcumulativeAccount" Relationship="Self.FK_Account_AcumulativeAccount" FromRole="Account" ToRole="AcumulativeAccount" />
+          <NavigationProperty Name="RegularAccount" Relationship="Self.FK_Account_RegularAccount" FromRole="Account" ToRole="RegularAccount" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Account" FromRole="Account" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="AcumulativeAccount">
+          <Key>
+            <PropertyRef Name="acumulativeID" />
+          </Key>
+          <Property Name="acumulativeID" Type="Int32" Nullable="false" />
+          <Property Name="growRate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_AcumulativeAccount" FromRole="AcumulativeAccount" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="bankID" />
+          </Key>
+          <Property Name="bankID" Type="Int32" Nullable="false" />
+          <Property Name="bankName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bankLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Bank" FromRole="Bank" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int32" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerSurname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerPhone" Type="Int32" Nullable="false" />
+          <Property Name="customerAccNo" Type="Int32" Nullable="false" />
+          <Property Name="accountID" Type="Int32" Nullable="false" />
+          <Property Name="bankID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Customer_Account" FromRole="Customer" ToRole="Account" />
+          <NavigationProperty Name="Bank" Relationship="Self.FK_Customer_Bank" FromRole="Customer" ToRole="Bank" />
+        </EntityType>
+        <EntityType Name="RegularAccount">
+          <Key>
+            <PropertyRef Name="regularID" />
+          </Key>
+          <Property Name="regularID" Type="Int32" Nullable="false" />
+          <Property Name="regularAccount1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_RegularAccount" FromRole="RegularAccount" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Account_AcumulativeAccount">
+          <End Role="AcumulativeAccount" Type="Self.AcumulativeAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcumulativeAccount">
+              <PropertyRef Name="acumulativeID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="acumulativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_RegularAccount">
+          <End Role="RegularAccount" Type="Self.RegularAccount" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RegularAccount">
+              <PropertyRef Name="regularID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="regularID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="accountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="bankID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="bankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankingSystemV3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AcumulativeAccounts" EntityType="Self.AcumulativeAccount" />
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="RegularAccounts" EntityType="Self.RegularAccount" />
+          <AssociationSet Name="FK_Account_AcumulativeAccount" Association="Self.FK_Account_AcumulativeAccount">
+            <End Role="AcumulativeAccount" EntitySet="AcumulativeAccounts" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_RegularAccount" Association="Self.FK_Account_RegularAccount">
+            <End Role="RegularAccount" EntitySet="RegularAccounts" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Account" Association="Self.FK_Customer_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Bank" Association="Self.FK_Customer_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankingSystemV3ModelStoreContainer" CdmEntityContainer="BankingSystemV3Entities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BankingSystemV3Model.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="accountType" ColumnName="accountType" />
+                <ScalarProperty Name="acumulativeID" ColumnName="acumulativeID" />
+                <ScalarProperty Name="regularID" ColumnName="regularID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcumulativeAccounts">
+            <EntityTypeMapping TypeName="BankingSystemV3Model.AcumulativeAccount">
+              <MappingFragment StoreEntitySet="AcumulativeAccount">
+                <ScalarProperty Name="acumulativeID" ColumnName="acumulativeID" />
+                <ScalarProperty Name="growRate" ColumnName="growRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="BankingSystemV3Model.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="bankID" ColumnName="bankID" />
+                <ScalarProperty Name="bankName" ColumnName="bankName" />
+                <ScalarProperty Name="bankLocation" ColumnName="bankLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="BankingSystemV3Model.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="customerSurname" ColumnName="customerSurname" />
+                <ScalarProperty Name="customerAddress" ColumnName="customerAddress" />
+                <ScalarProperty Name="customerPhone" ColumnName="customerPhone" />
+                <ScalarProperty Name="customerAccNo" ColumnName="customerAccNo" />
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="bankID" ColumnName="bankID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegularAccounts">
+            <EntityTypeMapping TypeName="BankingSystemV3Model.RegularAccount">
+              <MappingFragment StoreEntitySet="RegularAccount">
+                <ScalarProperty Name="regularID" ColumnName="regularID" />
+                <ScalarProperty Name="regularAccount1" ColumnName="regularAccount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
