@@ -22,8 +22,9 @@ namespace Bank
     
         public int accountID { get; set; }
         public string accountType { get; set; }
-        public int acumulativeID { get; set; }
-        public int regularID { get; set; }
+        public Nullable <int> acumulativeID { get; set; }
+        public Nullable<int> regularID { get; set; }
+        public Nullable<int> sum { get; set; }
     
         public virtual AcumulativeAccount AcumulativeAccount { get; set; }
         public virtual RegularAccount RegularAccount { get; set; }
