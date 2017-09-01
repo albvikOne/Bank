@@ -22,12 +22,8 @@ namespace Bank
     
         public int accountID { get; set; }
         public string accountType { get; set; }
-        public Nullable <int> acumulativeID { get; set; }
-        public Nullable<int> regularID { get; set; }
-        public Nullable<int> sum { get; set; }
+        public int sum { get; set; }
     
-        public virtual AcumulativeAccount AcumulativeAccount { get; set; }
-        public virtual RegularAccount RegularAccount { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Customer> Customers { get; set; }
     }

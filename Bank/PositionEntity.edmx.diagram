@@ -5,15 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2bb201dc8d1c4e7d995d06c665d84166" Name="Diagram1">
-        <EntityTypeShape EntityType="BankingSystemV3Model.Account" Width="1.5" PointX="3.125" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankingSystemV3Model.AcumulativeAccount" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankingSystemV3Model.Bank" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankingSystemV3Model.Customer" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankingSystemV3Model.RegularAccount" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="BankingSystemV3Model.FK_Account_AcumulativeAccount" ManuallyRouted="false" />
-        <AssociationConnector Association="BankingSystemV3Model.FK_Account_RegularAccount" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BankingSystemV3Model.Account" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankingSystemV3Model.Bank" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankingSystemV3Model.Customer" Width="1.5" PointX="4" PointY="1.875" IsExpanded="true" />
         <AssociationConnector Association="BankingSystemV3Model.FK_Customer_Account" ManuallyRouted="false" />
         <AssociationConnector Association="BankingSystemV3Model.FK_Customer_Bank" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BankingSystemV3Model.sysdiagram" Width="1.5" PointX="6.875" PointY="2.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -69,9 +69,6 @@
     <Compile Include="Account.cs">
       <DependentUpon>PositionEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="AcumulativeAccount.cs">
-      <DependentUpon>PositionEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Bank.cs">
       <DependentUpon>PositionEntity.tt</DependentUpon>
     </Compile>
@@ -95,7 +92,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegularAccount.cs">
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>PositionEntity.tt</DependentUpon>
     </Compile>
   </ItemGroup>

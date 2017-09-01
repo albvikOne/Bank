@@ -26,9 +26,8 @@ namespace Bank
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<AcumulativeAccount> AcumulativeAccounts { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<RegularAccount> RegularAccounts { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }
